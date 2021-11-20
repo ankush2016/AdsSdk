@@ -6,11 +6,11 @@ import android.widget.LinearLayout
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-import kotlin.math.min
 
 class AdmobAd(private val context: Context, private val isDebug: Boolean) {
     init {
         MobileAds.initialize(context) {}
+        RequestConfiguration.Builder().setTestDeviceIds(listOf("82A12B078FA435C8680FF1D519559BD7"))
     }
 
     private val adRequest = AdRequest.Builder().build()
