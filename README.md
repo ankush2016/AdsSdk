@@ -1,8 +1,18 @@
 # AdsSdk
 
-Admob Banner & Interstitial Ad Usage
+---
+# Admob Banner & Interstitial Ad Usage
+---
 
-class MainActivity : AppCompatActivity() {
+
+AndroidManifest.xml - meta-data
+---
+    android:name="com.google.android.gms.ads.APPLICATION_ID"
+    android:value="ca-app-pub-3940256099942544~3347511713"
+    
+
+Activity
+---
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var admobAds: AdmobAd
@@ -28,12 +38,3 @@ class MainActivity : AppCompatActivity() {
             admobAds.loadInterstitialAd("")
         }
     }
-}
-
-
-
-AndroidManifest.xml
-
-<meta-data
-    android:name="com.google.android.gms.ads.APPLICATION_ID"
-    android:value="ca-app-pub-3940256099942544~3347511713"/>
