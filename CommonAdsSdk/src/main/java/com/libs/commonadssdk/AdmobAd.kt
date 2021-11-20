@@ -12,7 +12,7 @@ class AdmobAd(private val context: Context, private val isDebug: Boolean) {
         MobileAds.initialize(context) {}
     }
 
-    //private val adRequest = AdRequest.Builder().build()
+    private val adRequest = AdRequest.Builder().build()
     private var mInterstitialAd: InterstitialAd? = null
 
 
@@ -21,13 +21,11 @@ class AdmobAd(private val context: Context, private val isDebug: Boolean) {
             adSize = AdSize.SMART_BANNER
             adUnitId = if (isDebug) "ca-app-pub-3940256099942544/6300978111" else bannerAdId
         }
-        val adRequest = AdRequest.Builder().build()
         adView.loadAd(adRequest)
         adViewLayout.addView(adView)
     }
 
     fun loadInterstitialAd(interstitialAdId: String) {
-        val adRequest = AdRequest.Builder().build()
         val adUnitId = if (isDebug) "ca-app-pub-3940256099942544/1033173712" else interstitialAdId
         InterstitialAd.load(context, adUnitId, adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
