@@ -50,6 +50,10 @@ dependencies {
                    FLAG_MUTABLE and will fail in apps targeting S+.'''
         }
     }
+
+
+    //facebook ads
+    implementation 'com.facebook.android:audience-network-sdk:6.8.0'
 }
 
 afterEvaluate {
