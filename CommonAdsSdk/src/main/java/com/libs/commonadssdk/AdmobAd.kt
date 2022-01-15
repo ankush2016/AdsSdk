@@ -6,10 +6,16 @@ import android.widget.LinearLayout
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import java.util.*
 
-class AdmobAd(private val context: Context, private val isDebug: Boolean) {
+class AdmobAd(private val context: Context, private val isDebug: Boolean, testDeviceIds: List<String>?) {
     init {
         MobileAds.initialize(context) {}
+        if (!testDeviceIds.isNullOrEmpty()) {
+            val configuration = RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build()
+            MobileAds.setRequestConfiguration(configuration)
+        }
+
     }
 
     private val adRequest = AdRequest.Builder().build()
