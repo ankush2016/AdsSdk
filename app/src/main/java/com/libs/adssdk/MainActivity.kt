@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        admobAds = AdmobAd(this, BuildConfig.DEBUG)
+        admobAds = AdmobAd(this, BuildConfig.DEBUG, null)
         admobAds.inflateBannerAd("", binding.adViewLayout)
 
         binding.btnShowInterstitial.setOnClickListener {
