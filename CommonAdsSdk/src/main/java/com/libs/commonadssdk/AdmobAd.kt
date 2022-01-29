@@ -24,9 +24,19 @@ class AdmobAd(private val context: Context, private val isDebug: Boolean, testDe
 
     fun inflateBannerAd(bannerAdId: String, adViewLayout: LinearLayout) {
         val adView = AdView(context).apply {
-            adSize = AdSize.SMART_BANNER
+            adSize = AdSize.LARGE_BANNER
             //adUnitId = if (isDebug) "ca-app-pub-3940256099942544/6300978111" else bannerAdId
             adUnitId = bannerAdId
+        }
+        adView.loadAd(adRequest)
+        adViewLayout.addView(adView)
+    }
+
+    fun inflateMedRectangleAd(adId: String, adViewLayout: LinearLayout) {
+        val adView = AdView(context).apply {
+            adSize = AdSize.MEDIUM_RECTANGLE
+            //adUnitId = if (isDebug) "ca-app-pub-3940256099942544/6300978111" else bannerAdId
+            adUnitId = adId
         }
         adView.loadAd(adRequest)
         adViewLayout.addView(adView)
