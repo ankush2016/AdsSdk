@@ -27,7 +27,7 @@ class FacebookAd(private val context: Context, private val installer: String?) {
         if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
             localPlacementId = "VID_HD_16_9_15S_APP_INSTALL#YOUR_PLACEMENT_ID"
         } else {
-            if (isAppDownloadFromPlayStore()) {
+            if (!isAppDownloadFromPlayStore()) {
                 Log.e(TAG, "APP NOT DOWNLOADED FROM PLAY STORE - returning")
                 onAdDismissed?.invoke()
                 return
