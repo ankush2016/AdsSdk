@@ -13,9 +13,9 @@ class FacebookAd(private val context: Context, private val installer: String?) {
 
     init {
         AudienceNetworkAds.initialize(context)
-        if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
+        //if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
             AdSettings.turnOnSDKDebugger(context)
-        }
+        //}
         AudienceNetworkAds
             .buildInitSettings(context)
             //.withInitListener(this)
@@ -24,52 +24,52 @@ class FacebookAd(private val context: Context, private val installer: String?) {
 
     fun setupAndShowInterstitialAd(placementId: String, showInterstitial: Boolean, onAdDismissed: (() -> Unit)?) {
         var localPlacementId = placementId
-        if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
+        //if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
             localPlacementId = "VID_HD_16_9_15S_APP_INSTALL#YOUR_PLACEMENT_ID"
-        } else {
+        //} else {
             if (isAppDownloadFromPlayStore()) {
                 return
             }
-        }
+        //}
         if (!::interstitialAd.isInitialized) {
             interstitialAd = InterstitialAd(context, localPlacementId)
         }
 
         val interstitialAdListener = object : InterstitialAdListener {
             override fun onError(ad: Ad?, adError: AdError?) {
-                if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
+                //if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
                     Log.e(TAG, "Interstitial ad failed to load: ${adError?.errorMessage}")
-                }
+                //}
             }
 
             override fun onAdLoaded(ad: Ad?) {
-                if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
+                //if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
                     Log.e(TAG, "Interstitial ad is loaded and ready to be displayed!")
-                }
+                //}
             }
 
             override fun onAdClicked(ad: Ad?) {
-                if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
+                //if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
                     Log.e(TAG, "Interstitial ad clicked!");
-                }
+                //}
             }
 
             override fun onLoggingImpression(ad: Ad?) {
-                if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
+//                if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
                     Log.e(TAG, "Interstitial ad impression logged!")
-                }
+//                }
             }
 
             override fun onInterstitialDisplayed(ad: Ad?) {
-                if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
+//                if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
                     Log.e(TAG, "Interstitial ad displayed.")
-                }
+//                }
             }
 
             override fun onInterstitialDismissed(ad: Ad?) {
-                if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
+//                if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
                     Log.e(TAG, "Interstitial ad dismissed.")
-                }
+//                }
                 onAdDismissed?.invoke()
                 interstitialAd.loadAd()
             }
