@@ -13,9 +13,9 @@ class FacebookAd(private val context: Context, private val installer: String?) {
 
     init {
         AudienceNetworkAds.initialize(context)
-        //if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
+        if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
             AdSettings.turnOnSDKDebugger(context)
-        //}
+        }
         AudienceNetworkAds
             .buildInitSettings(context)
             //.withInitListener(this)
