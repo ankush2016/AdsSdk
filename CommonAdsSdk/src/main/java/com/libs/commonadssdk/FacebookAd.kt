@@ -24,13 +24,15 @@ class FacebookAd(private val context: Context, private val installer: String?) {
 
     fun setupAndShowInterstitialAd(placementId: String, showInterstitial: Boolean, onAdDismissed: (() -> Unit)?) {
         var localPlacementId = placementId
-        //if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
+        if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
             localPlacementId = "VID_HD_16_9_15S_APP_INSTALL#YOUR_PLACEMENT_ID"
-        //} else {
+        } else {
             if (isAppDownloadFromPlayStore()) {
+                Log.e(TAG, "APP NOT DOWNLOADED FROM PLAY STORE - returning")
+                onAdDismissed?.invoke()
                 return
             }
-        //}
+        }
         if (!::interstitialAd.isInitialized) {
             interstitialAd = InterstitialAd(context, localPlacementId)
         }
