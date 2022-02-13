@@ -41,6 +41,8 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Ad Dismissed", Toast.LENGTH_SHORT).show()
             }
         }
+
+        facebookAd.inflateMedRectAd("", binding.adViewLayout)
     }
 
     override fun onResume() {

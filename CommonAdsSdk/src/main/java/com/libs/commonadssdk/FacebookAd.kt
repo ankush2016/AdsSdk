@@ -3,6 +3,7 @@ package com.libs.commonadssdk
 import android.content.Context
 import android.text.TextUtils
 import android.util.Log
+import android.widget.LinearLayout
 import com.facebook.ads.*
 
 class FacebookAd(private val context: Context, private val installer: String?) {//: AudienceNetworkAds.InitListener {
@@ -22,13 +23,28 @@ class FacebookAd(private val context: Context, private val installer: String?) {
             .initialize()
     }
 
+    fun inflateMedRectAd(placementId: String, adContainer: LinearLayout) {
+        var localPlacementId = placementId
+        if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
+            localPlacementId = "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID"
+        } else {
+            if (!isAppDownloadFromPlayStore()) {
+                showLog("APP NOT DOWNLOADED FROM PLAY STORE - returning")
+                return
+            }
+        }
+        val adView = AdView(context, localPlacementId, AdSize.RECTANGLE_HEIGHT_250)
+        adContainer.addView(adView)
+        adView.loadAd()
+    }
+
     fun setupAndShowInterstitialAd(placementId: String, showInterstitial: Boolean, onAdDismissed: (() -> Unit)?) {
         var localPlacementId = placementId
         if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
             localPlacementId = "VID_HD_16_9_15S_APP_INSTALL#YOUR_PLACEMENT_ID"
         } else {
             if (!isAppDownloadFromPlayStore()) {
-                Log.e(TAG, "APP NOT DOWNLOADED FROM PLAY STORE - returning")
+                showLog("APP NOT DOWNLOADED FROM PLAY STORE - returning")
                 onAdDismissed?.invoke()
                 return
             }
