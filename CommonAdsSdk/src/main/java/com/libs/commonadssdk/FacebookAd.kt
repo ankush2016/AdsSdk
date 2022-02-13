@@ -25,6 +25,7 @@ class FacebookAd(private val context: Context, private val installer: String?) {
 
     fun inflateMedRectAd(placementId: String, adContainer: LinearLayout) {
         var localPlacementId = placementId
+        Log.e(TAG, "BUILD_TYPE -> ${BuildConfig.BUILD_TYPE}")
         if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
             localPlacementId = "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID"
         } else {
