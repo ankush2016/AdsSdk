@@ -39,39 +39,27 @@ class FacebookAd(private val context: Context, private val installer: String?) {
 
         val interstitialAdListener = object : InterstitialAdListener {
             override fun onError(ad: Ad?, adError: AdError?) {
-                //if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
-                    Log.e(TAG, "Interstitial ad failed to load: ${adError?.errorMessage}")
-                //}
+                showLog("Interstitial ad failed to load: ${adError?.errorMessage}")
             }
 
             override fun onAdLoaded(ad: Ad?) {
-                //if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
-                    Log.e(TAG, "Interstitial ad is loaded and ready to be displayed!")
-                //}
+                showLog("Interstitial ad is loaded and ready to be displayed!")
             }
 
             override fun onAdClicked(ad: Ad?) {
-                //if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
-                    Log.e(TAG, "Interstitial ad clicked!");
-                //}
+                showLog("Interstitial ad clicked!")
             }
 
             override fun onLoggingImpression(ad: Ad?) {
-//                if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
-                    Log.e(TAG, "Interstitial ad impression logged!")
-//                }
+                showLog("Interstitial ad impression logged!")
             }
 
             override fun onInterstitialDisplayed(ad: Ad?) {
-//                if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
-                    Log.e(TAG, "Interstitial ad displayed.")
-//                }
+                showLog("Interstitial ad displayed.")
             }
 
             override fun onInterstitialDismissed(ad: Ad?) {
-//                if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
-                    Log.e(TAG, "Interstitial ad dismissed.")
-//                }
+                showLog("Interstitial ad dismissed.")
                 onAdDismissed?.invoke()
                 interstitialAd.loadAd()
             }
@@ -101,6 +89,12 @@ class FacebookAd(private val context: Context, private val installer: String?) {
     private fun isAppDownloadFromPlayStore(): Boolean {
         val validInstallers: List<String> = ArrayList(listOf("com.android.vending", "com.google.android.feedback"))
         return !TextUtils.isEmpty(installer) && validInstallers.contains(installer)
+    }
+
+    private fun showLog(message: String) {
+        if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
+            Log.e(TAG, message)
+        }
     }
 
     /*override fun onInitialized(result: AudienceNetworkAds.InitResult?) {
